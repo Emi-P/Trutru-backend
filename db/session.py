@@ -1,21 +1,17 @@
+# db/session.py
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import DeclarativeBase
-import os
 
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), "maindata.db")
-URL_DATABASE = f"sqlite:///{DATABASE_PATH}"
+DATABASE_URL = "sqlite:///./trutru.db"
 
-engine = create_engine(URL_DATABASE)
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False},  # necesario para FastAPI
+)
 
-localSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-class Base(DeclarativeBase):
-    pass
-
-def get_db():
-    db = localSession()
-    try:
-        yield db
-    finally:
-        db.close()
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine,
+)

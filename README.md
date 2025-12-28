@@ -1,5 +1,5 @@
 ## Levantar el server
-Parado en el directorio app/ ejecutar:
+Parado en el directorio base ejecutar:
 
  ``` uvicorn main:app --reload ``` 
 
@@ -164,7 +164,7 @@ Modelos de base de datos (ORM).
 ### `app/schemas/`
 Schemas Pydantic.
 
-- Validan input/output
+- Validan input/output DE LA API
 - Separan API pública de modelos internos
 
 ---
@@ -172,7 +172,7 @@ Schemas Pydantic.
 ### `app/db/`
 Configuración de base de datos.
 
-- engine
+- db engine
 - sesión
 - conexión
 
